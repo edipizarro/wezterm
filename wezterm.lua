@@ -1,4 +1,4 @@
-local config = {}
+local mouse_bindings = {}
 local keys = {}
 local wezterm = require("wezterm")
 
@@ -19,19 +19,27 @@ table.insert(keys, { key = "}", mods = "CTRL|ALT", action = wezterm.action({ Mov
 -- Toggle full screen with F11
 table.insert(keys, { key = "F11", mods = "NONE", action = "ToggleFullScreen" })
 
--- Copy selection with right click
-config.mouse_bindings = {
+-- Copy and paste with right click
+mouse_bindings = {
 	{
 		event = { Down = { streak = 1, button = "Right" } },
 		mods = "NONE",
-		action = wezterm.action({ PasteFrom = "Clipboard" }),
+		action = wezterm.action_callback(function(window, pane)
+			local has_selection = window:get_selection_text_for_pane(pane) ~= ""
+			if has_selection then
+				window:perform_action(wezterm.action.CopyTo("ClipboardAndPrimarySelection"), pane)
+				window:perform_action(wezterm.action.ClearSelection, pane)
+			else
+				window:perform_action(wezterm.action.PasteFrom("Clipboard"), pane)
+			end
+		end),
 	},
 }
 
 return {
 	color_scheme = "Dracula (Official)",
-	config = config,
 	keys = keys,
+	mouse_bindings = mouse_bindings,
 	tab_bar_at_bottom = true,
 	use_fancy_tab_bar = false,
 	window_decorations = "RESIZE",
