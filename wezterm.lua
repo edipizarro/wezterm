@@ -4,7 +4,6 @@ local wezterm = require("wezterm")
 
 -- Select tab with ALT+N°
 for i = 1, 9 do
-	-- ALT + number to activate that tab
 	table.insert(keys, {
 		key = tostring(i),
 		mods = "ALT",
