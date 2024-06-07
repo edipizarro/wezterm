@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 
+-- Select tab with ALT+N°
 local keys = {}
 for i = 1, 9 do
 	-- ALT + number to activate that tab
@@ -10,11 +11,11 @@ for i = 1, 9 do
 	})
 end
 
--- Move tab
+-- Move between tabs with CTRL+ALT+ { or }
 table.insert(keys, { key = "{", mods = "CTRL|ALT", action = wezterm.action({ MoveTabRelative = -1 }) })
 table.insert(keys, { key = "}", mods = "CTRL|ALT", action = wezterm.action({ MoveTabRelative = 1 }) })
 
--- Maximize window with F11
+-- Toggle full screen with F11
 table.insert(keys, { key = "F11", mods = "NONE", action = "ToggleFullScreen" })
 
 return {
