@@ -1,7 +1,8 @@
+local config = {}
+local keys = {}
 local wezterm = require("wezterm")
 
 -- Select tab with ALT+N°
-local keys = {}
 for i = 1, 9 do
 	-- ALT + number to activate that tab
 	table.insert(keys, {
@@ -18,10 +19,20 @@ table.insert(keys, { key = "}", mods = "CTRL|ALT", action = wezterm.action({ Mov
 -- Toggle full screen with F11
 table.insert(keys, { key = "F11", mods = "NONE", action = "ToggleFullScreen" })
 
+-- Copy selection with right click
+config.mouse_bindings = {
+	{
+		event = { Down = { streak = 1, button = "Right" } },
+		mods = "NONE",
+		action = wezterm.action({ PasteFrom = "Clipboard" }),
+	},
+}
+
 return {
 	color_scheme = "Dracula (Official)",
+	config = config,
+	keys = keys,
 	tab_bar_at_bottom = true,
 	use_fancy_tab_bar = false,
 	window_decorations = "RESIZE",
-	keys = keys,
 }
