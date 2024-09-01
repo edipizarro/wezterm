@@ -1,6 +1,10 @@
 local mouse_bindings = {}
 local keys = {}
 local wezterm = require("wezterm")
+local config = wezterm.config_builder()
+
+-- Wezterm Config Options
+config.audible_bell = "Disabled"
 
 -- Select tab with ALT+N°
 for i = 1, 9 do
@@ -42,4 +46,5 @@ return {
 	tab_bar_at_bottom = true,
 	use_fancy_tab_bar = false,
 	window_decorations = "RESIZE",
+	audible_bell = config.audible_bell,
 }
