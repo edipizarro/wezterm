@@ -48,3 +48,6 @@ return {
 	window_decorations = "RESIZE",
 	audible_bell = config.audible_bell,
 }
+-- Select with regex using CTRL+SHIFT+SPACE
+config.quick_select_patterns = { "([0-9a-zA-Z]+(?:-[0-9a-zA-Z]+)+)" }
+
