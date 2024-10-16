@@ -1,26 +1,8 @@
-local mouse_bindings = {}
-local keys = {}
 local wezterm = require("wezterm")
+local keymaps = require("keymaps")
 local config = wezterm.config_builder()
 
--- Wezterm Config Options
-config.audible_bell = "Disabled"
-
--- Select tab with ALT+N°
-for i = 1, 9 do
-	table.insert(keys, {
-		key = tostring(i),
-		mods = "ALT",
-		action = wezterm.action({ ActivateTab = i - 1 }),
-	})
-end
-
--- Move between tabs with CTRL+ALT+ { or }
-table.insert(keys, { key = "{", mods = "CTRL|ALT", action = wezterm.action({ MoveTabRelative = -1 }) })
-table.insert(keys, { key = "}", mods = "CTRL|ALT", action = wezterm.action({ MoveTabRelative = 1 }) })
-
--- Toggle full screen with F11
-table.insert(keys, { key = "F11", mods = "NONE", action = "ToggleFullScreen" })
+local mouse_bindings = {}
 
 -- Copy and paste with right click
 mouse_bindings = {
@@ -39,15 +21,22 @@ mouse_bindings = {
 	},
 }
 
-return {
-	color_scheme = "Dracula (Official)",
-	keys = keys,
-	mouse_bindings = mouse_bindings,
-	tab_bar_at_bottom = true,
-	use_fancy_tab_bar = false,
-	window_decorations = "RESIZE",
-	audible_bell = config.audible_bell,
-}
 -- Select with regex using CTRL+SHIFT+SPACE
 config.quick_select_patterns = { "([0-9a-zA-Z]+(?:-[0-9a-zA-Z]+)+)" }
 
+-- Use keybindings in keymaps.lua
+config.disable_default_key_bindings = true
+for key, value in pairs(keymaps) do
+	config[key] = value
+end
+
+config.color_scheme = "Dracula (Official)"
+config.mouse_bindings = mouse_bindings
+config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = false
+config.window_decorations = "RESIZE"
+
+-- Wezterm Config Options
+config.audible_bell = "Disabled"
+
+return config
