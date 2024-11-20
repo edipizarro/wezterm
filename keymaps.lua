@@ -13,6 +13,8 @@ local keys = {
 	{ key = "0", mods = "SHIFT|CTRL", action = act.ResetFontSize },
 	{ key = "C", mods = "CTRL", action = act.CopyTo("Clipboard") },
 	{ key = "C", mods = "SHIFT|CTRL", action = act.CopyTo("Clipboard") },
+	{ key = "C", mods = "CMD", action = act.CopyTo("Clipboard") },
+	{ key = "C", mods = "SHIFT|CMD", action = act.CopyTo("Clipboard") },
 	{ key = "F", mods = "CTRL", action = act.Search("CurrentSelectionOrEmptyString") },
 	{ key = "F", mods = "SHIFT|CTRL", action = act.Search("CurrentSelectionOrEmptyString") },
 	{ key = "K", mods = "CTRL", action = act.ShowDebugOverlay },
@@ -50,6 +52,8 @@ local keys = {
 	{ key = "_", mods = "CTRL", action = act.DecreaseFontSize },
 	{ key = "_", mods = "SHIFT|CTRL", action = act.DecreaseFontSize },
 	{ key = "c", mods = "SHIFT|CTRL", action = act.CopyTo("Clipboard") },
+	{ key = "c", mods = "CMD", action = act.CopyTo("Clipboard") },
+	{ key = "c", mods = "SHIFT|CMD", action = act.CopyTo("Clipboard") },
 	{ key = "f", mods = "SHIFT|CTRL", action = act.Search("CurrentSelectionOrEmptyString") },
 	{ key = "k", mods = "SHIFT|CTRL", action = act.ClearScrollback("ScrollbackOnly") },
 	{ key = "l", mods = "SHIFT|CTRL", action = act.ShowDebugOverlay },
@@ -86,6 +90,10 @@ local keys = {
 	{ key = "Insert", mods = "CTRL", action = act.CopyTo("PrimarySelection") },
 	{ key = "Copy", mods = "NONE", action = act.CopyTo("Clipboard") },
 	{ key = "Paste", mods = "NONE", action = act.PasteFrom("Clipboard") },
+	-- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
+	{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
+	-- Make Option-Right equivalent to Alt-f; forward-word
+	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
 }
 
 local copy_mode = {
@@ -181,6 +189,7 @@ end
 
 -- Toggle full screen with F11
 table.insert(keys, { key = "F11", mods = "NONE", action = "ToggleFullScreen" })
+table.insert(keys, { key = "F11", mods = "CMD", action = "ToggleFullScreen" })
 
 return {
 	keys = keys,
