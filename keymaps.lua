@@ -94,6 +94,8 @@ local keys = {
 	{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
 	-- Make Option-Right equivalent to Alt-f; forward-word
 	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
+	-- Shift+Enter to open a new line
+	{ key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\n") },
 }
 
 local copy_mode = {
