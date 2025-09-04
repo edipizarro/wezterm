@@ -33,10 +33,12 @@ end
 config.color_scheme = "Dracula (Official)"
 config.mouse_bindings = mouse_bindings
 config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = false
 config.window_decorations = "RESIZE"
 
 -- Wezterm Config Options
 config.audible_bell = "Disabled"
+
+-- Allow tabs to be wider to show more of the title
+config.tab_max_width = 32
 
 return config
