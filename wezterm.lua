@@ -30,13 +30,15 @@ for key, value in pairs(keymaps) do
 	config[key] = value
 end
 
+-- Color scheme
 config.color_scheme = "Dracula (Official)"
-config.mouse_bindings = mouse_bindings
-config.tab_bar_at_bottom = true
-config.window_decorations = "RESIZE"
+config.term = "xterm-256color"
 
 -- Wezterm Config Options
 config.audible_bell = "Disabled"
+config.mouse_bindings = mouse_bindings
+config.tab_bar_at_bottom = true
+config.window_decorations = "RESIZE"
 
 -- Allow tabs to be wider to show more of the title
 config.tab_max_width = 32
