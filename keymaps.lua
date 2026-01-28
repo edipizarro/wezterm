@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local custom_keymaps = require("custom_keymaps")
 local act = wezterm.action
 
 local keys = {
@@ -90,12 +91,6 @@ local keys = {
 	{ key = "Insert", mods = "CTRL", action = act.CopyTo("PrimarySelection") },
 	{ key = "Copy", mods = "NONE", action = act.CopyTo("Clipboard") },
 	{ key = "Paste", mods = "NONE", action = act.PasteFrom("Clipboard") },
-	-- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
-	{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
-	-- Make Option-Right equivalent to Alt-f; forward-word
-	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
-	-- Shift+Enter to open a new line
-	{ key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\n") },
 }
 
 local copy_mode = {
@@ -180,18 +175,10 @@ local search_mode = {
 	{ key = "DownArrow", mods = "NONE", action = act.CopyMode("NextMatch") },
 }
 
--- Select tab with ALT+N°
-for i = 1, 9 do
-	table.insert(keys, {
-		key = tostring(i),
-		mods = "ALT",
-		action = wezterm.action({ ActivateTab = i - 1 }),
-	})
+-- Merge custom keymaps
+for _, binding in ipairs(custom_keymaps) do
+	table.insert(keys, binding)
 end
-
--- Toggle full screen with F11
-table.insert(keys, { key = "F11", mods = "NONE", action = "ToggleFullScreen" })
-table.insert(keys, { key = "F11", mods = "CMD", action = "ToggleFullScreen" })
 
 return {
 	keys = keys,
