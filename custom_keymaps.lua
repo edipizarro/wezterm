@@ -11,12 +11,12 @@ local keys = {
 	{ key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\n") },
 
 	-- Change tabs with Option+Up/Down
-	{ key = "DownArrow", mods = "OPT", action = act.ActivateTabRelative(-1) },
-	{ key = "UpArrow", mods = "OPT", action = act.ActivateTabRelative(1) },
+	{ key = "DownArrow", mods = "OPT", action = act.ActivateTabRelative(1) },
+	{ key = "UpArrow", mods = "OPT", action = act.ActivateTabRelative(-1) },
 
 	-- Change panes with Cmd+Up/Down
-	{ key = "DownArrow", mods = "CMD", action = act.ActivatePaneDirection("Left") },
-	{ key = "UpArrow", mods = "CMD", action = act.ActivatePaneDirection("Right") },
+	{ key = "DownArrow", mods = "CMD", action = act.ActivatePaneDirection("Right") },
+	{ key = "UpArrow", mods = "CMD", action = act.ActivatePaneDirection("Left") },
 }
 
 -- Select tab with ALT+N°
